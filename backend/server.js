@@ -1,12 +1,11 @@
-// backend/server.js
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const os = require('os'); // Import the os module
 require('dotenv').config();
 
 // Initialize the Express app
 const app = express();
-console.log(process.env.PORT)
 const PORT = process.env.PORT || 5000;
 
 // Middleware
@@ -24,7 +23,21 @@ app.use('/api/chat', chatRoutes);
 const errorHandler = require('./middlewares/errorHandler');
 app.use(errorHandler);
 
+// Utility to get network address
+const getNetworkAddress = () => {
+  const interfaces = os.networkInterfaces();
+  for (const interfaceName in interfaces) {
+    for (const iface of interfaces[interfaceName]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return 'localhost'; 
+};
+
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  const host = getNetworkAddress();
+  console.log(`Server is running on http://${host}:${PORT}`);
 });
