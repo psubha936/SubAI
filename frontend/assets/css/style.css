@@ -177,3 +177,35 @@ header p {
         font-size: 14px;
     }
 }
+
+.user-message, .ai-message {
+    white-space: pre-wrap; /* Preserves new lines */
+    word-wrap: break-word; /* Prevents long words from overflowing */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+.user-message {
+    background-color: #d4edda;
+    color: #155724;
+    text-align: right;
+    margin-left: auto;
+}
+
+.ai-message {
+    background-color: #e7f4fc;
+    color: #0c5460;
+    text-align: left;
+    margin-right: auto;
+}
+
+#messages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
